@@ -32,8 +32,13 @@ class Process extends React.Component {
       showsecond: false,
       showanalysis: false,
       showstart: false,
+      showlogo: true,
+      bigtext: false,
+      vocab:'',
       same:'',
       diff:'',
+      ipa:'',
+      en:'',
 
       username: "",
       avatar: "",
@@ -52,9 +57,9 @@ class Process extends React.Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    const itemsRef = firebase.database().ref('diff');
+    const itemsRef = firebase.database().ref('en');
     const item = {
-      diff_en_gr: "b p m f"
+      Cupful: "pf"
     }
     itemsRef.push(item);
     this.setState({
@@ -101,6 +106,47 @@ class Process extends React.Component {
     });
   }
 
+  getVocab_gr() {
+    const gr_ref = firebase.database().ref('gr');
+    const get_gr = (i) => {
+      for (let ii in i) {
+        return i[ii].Pfeffer;
+      }
+    }
+
+    gr_ref.on('value', (snapshot) => {
+      const gr = get_gr(snapshot.val())
+      localStorage.setItem("temp_gr", gr);   
+    });
+
+    var temp_gr = localStorage.getItem("temp_gr");
+    const temp = temp_gr
+    this.setState({
+      ipa: temp,
+      vocab: 'Pfeffer'
+    });
+  }
+
+  getVocab_en() {
+    const en_ref = firebase.database().ref('en');
+    const get_en = (i) => {
+      for (let ii in i) {
+        return i[ii].pf;
+      }
+    }
+
+    en_ref.on('value', (snapshot) => {
+      const en = get_en(snapshot.val())
+      localStorage.setItem("temp_en", en);   
+    });
+    
+    var temp_en = localStorage.getItem("temp_en");
+    const temp = temp_en
+    this.setState({
+      en: 'Cupful'
+    });
+  }
+
   next1 = (event) => {
     var char = event.which || event.keyCode;
     if (char === 13) {
@@ -121,11 +167,11 @@ class Process extends React.Component {
     this.setState({ showfirst: false})
     this.setState({ showsecond: false})
     this.setState({ showstart: false})
+    this.setState({ showlogo: false})
+    this.setState({ bigtext: true})
+    this.getVocab_gr()
+    this.getVocab_en()
     this.setState({ text: ' '})
-  }
-
-  ahand() {
-    
   }
 
   render() {
@@ -133,10 +179,25 @@ class Process extends React.Component {
     const { showsecond } = this.state;
     const { showanalysis } = this.state;
     const { showstart } = this.state;
+    const { showlogo } = this.state;
+    const { bigtext } = this.state;
+    const { vocab } = this.state;
+
 
     return (
       <div className="gutter-example">
-        <img class='center' src={require("./logo.png")} width="142" height="142"/>
+        {showlogo && (
+          <img class='center' src={require("./logo.png")} width="142" height="142"/>
+        )}
+        {!showlogo && (
+          <img class='center' id='uplogo' src={require("./logo.png")} width="142" height="142"/>
+        )}
+        {bigtext && (
+          <div class="tooltip">
+            <p id='vocab'>{this.state.vocab}</p>
+            <span class="tooltiptext">{this.state.en + " , " + this.state.ipa}</span>
+          </div>
+        )}
         <Row>
           <Col className="gutter-row" span={4}>
           </Col>
@@ -211,14 +272,6 @@ class Process extends React.Component {
             <Button id="hand" onClick={this.handleSubmit}>Give me a hand 👋</Button>
           </Button>
         </Upload>
-        /*<FilePicker
-          extensions={['png']}
-          onChange={FileObject => (this.upload(FileObject))}
-          onError={errMsg => (console.log(errMsg))}>
-      <button>
-        Click to upload image
-      </button>
-    </FilePicker>*/
         <div>
       </div>
       </div>

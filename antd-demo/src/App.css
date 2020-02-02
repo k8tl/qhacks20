@@ -26,10 +26,6 @@
   color: white;
 }
 
-*{
-  
-}
-
 .App-link {
   color: #61dafb;
 }
@@ -55,6 +51,9 @@
 img {
   margin-top:15%;
   margin-bottom:48px;
+}
+#uplogo {
+  margin-top:4% !important;
 }
 
 p {
@@ -104,3 +103,50 @@ pre {
 }
 
 html, body {margin: 0; height: 100%; overflow: hidden}
+
+#vocab {
+  font-size: 60px;
+  color: #000;
+}
+
+#vocab {
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.tooltiptext {
+  position: fixed;
+  top: 57%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.tooltip .tooltiptext {
+  display: block; 
+  margin-left: auto;
+  margin-right: auto;
+
+  visibility: hidden;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 24px;
+  padding-right: 24px;
+  background-color: #8BC43B;
+  color: #fff;
+  text-align: center;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+  font-size: 50px;
+  visibility: visible;
+  opacity: 1;
+}
+
+.tooltiptext {
+  border-radius: 12px;
+}
