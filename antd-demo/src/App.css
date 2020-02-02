@@ -1,0 +1,106 @@
+@import '~antd/dist/antd.css';
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+*{
+  
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.gutter-example .ant-row > div {
+  background: transparent;
+  border: 0;
+}
+.gutter-box {
+  background: #00a0e9;
+  padding: 5px 0;
+}
+
+img {
+  margin-top:15%;
+  margin-bottom:48px;
+}
+
+p {
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+Button {
+  margin-top: 12px;
+  display: block; 
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ant-btn-primary {
+  background-color: #81AE34 !important;
+}
+
+#hand {
+  position: fixed;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#start {
+  margin-top: 10%;
+  display: block; 
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.center {
+  display: block; 
+  margin-left: auto;
+  margin-right: auto;
+}
+
+Input {
+  margin-top: 8px !important;
+}
+
+pre {
+  margin-bottom: 12px;
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+html, body {margin: 0; height: 100%; overflow: hidden}
