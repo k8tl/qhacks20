@@ -1,12 +1,15 @@
 import io
 import os
 import html
+import epitran
 
 # Imports the Google Cloud client libraries
 from google.api_core.protobuf_helpers import get_messages
 from google.cloud import translate_v3beta1 as translate
 from google.cloud import vision
 from google.colab import drive
+from firebase import firebase
+
 
 drive.mount('/content/gdrive')
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="/content/gdrive/My Drive/qhacks/qhacks2020-fca94e2d0136.json"
@@ -14,6 +17,12 @@ os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="/content/gdrive/My Drive/qhacks/qh
 class newTr:
     def __init__(self, inFile):
         self.img = inFile
+        self.firebase = firebase.FirebaseApplication('https://xxxxx.firebaseio.com/', None)  
+
+    def putImage(self):
+      storage = firebase.storage()
+      storage.child().put
+
 
     def pic_to_text(self):
         """Detects text in an image file
@@ -35,7 +44,7 @@ class newTr:
 
         # For dense text, use document_text_detection
         # For less dense text, use text_detection
-        response = client.text_detection(image=image)
+        response = client.document_text_detection(image=image)
         text = response.full_text_annotation.text
 
         return text
@@ -75,13 +84,28 @@ class newTr:
         # Extract translated text from API response
         return result
 
+        def ipa(self):
+          ipa_list = []
+          for word in translated:
+
+            ipa_list.append(symbol)
+
+        def data(self):
+          data = {
+              "Image" : self.img,
+              "OriginalText" : text_to_translate,
+              "TranslatedText" : translated,
+              "IPA" : translated.ipa()
+          }
+          result = firebase.post('https://qhacks2020-86c07.firebaseio.com')
+
 def main():
     # Photo from which to extract text
     new = newTr('/content/gdrive/My Drive/qhacks/surveillance.jpeg')
     # photo -> detected text
     text_to_translate = new.pic_to_text()
     print(text_to_translate)
-    new.translate_text(text_to_translate, 'fr', 'en', 'qhacks2020-86c07')
+    translated = new.translate_text(text_to_translate, 'fr', 'en', 'qhacks2020-86c07')
 
 if __name__=="__main__":
     main()
