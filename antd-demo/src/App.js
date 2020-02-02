@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 import ReactDOM from "react-dom";
 import {Upload, message} from 'antd';
 import firebase from 'firebase'
-import FileUploader from "react-firebase-file-uploader";
+import { FilePicker } from 'react-file-picker'
 
 const firebaseConfig = {
   apiKey: "AIzaSyCayBzNF6X6bE8_g9Kyhf4q80-ozc_5NsY",
@@ -35,10 +35,11 @@ class Process extends React.Component {
       same:'',
       diff:'',
 
-      filenames: [],
-      downloadURLs: [],
+      username: "",
+      avatar: "",
       isUploading: false,
-      uploadProgress: 0
+      progress: 0,
+      avatarURL: ""
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -60,7 +61,10 @@ class Process extends React.Component {
     });
   }
 
-  componentDidMount() {
+  upload(f) {
+    const fn = f.name;
+    const storageRef = firebase.storage().ref('/images' + fn);
+    const uploadTask = storageRef.put(f);
   }
 
   getList() {
@@ -129,6 +133,7 @@ class Process extends React.Component {
     const { showsecond } = this.state;
     const { showanalysis } = this.state;
     const { showstart } = this.state;
+
     return (
       <div className="gutter-example">
         <img class='center' src={require("./logo.png")} width="142" height="142"/>
@@ -206,6 +211,16 @@ class Process extends React.Component {
             <Button id="hand" onClick={this.handleSubmit}>Give me a hand 👋</Button>
           </Button>
         </Upload>
+        /*<FilePicker
+          extensions={['png']}
+          onChange={FileObject => (this.upload(FileObject))}
+          onError={errMsg => (console.log(errMsg))}>
+      <button>
+        Click to upload image
+      </button>
+    </FilePicker>*/
+        <div>
+      </div>
       </div>
     );
   }
