@@ -1,0 +1,19 @@
+{
+  "name": "qhacks20",
+  "version": "1.0.0",
+  "description": "QHacks 2020 project :)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/k8tl/qhacks20.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/k8tl/qhacks20/issues"
+  },
+  "homepage": "https://github.com/k8tl/qhacks20#readme"
+}

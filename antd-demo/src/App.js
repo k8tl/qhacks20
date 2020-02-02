@@ -5,8 +5,10 @@ import './App.css';
 import { Row, Col } from 'antd';
 import { useState, useEffect } from 'react';
 import ReactDOM from "react-dom";
-
+import {Upload, message} from 'antd';
 import firebase from 'firebase'
+import FileUploader from "react-firebase-file-uploader";
+
 const firebaseConfig = {
   apiKey: "AIzaSyCayBzNF6X6bE8_g9Kyhf4q80-ozc_5NsY",
   authDomain: "qhacks2020-86c07.firebaseapp.com",
@@ -31,7 +33,12 @@ class Process extends React.Component {
       showanalysis: false,
       showstart: false,
       same:'',
-      diff:''
+      diff:'',
+
+      filenames: [],
+      downloadURLs: [],
+      isUploading: false,
+      uploadProgress: 0
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -113,6 +120,10 @@ class Process extends React.Component {
     this.setState({ text: ' '})
   }
 
+  ahand() {
+    
+  }
+
   render() {
     const { showfirst } = this.state;
     const { showsecond } = this.state;
@@ -190,12 +201,34 @@ class Process extends React.Component {
           <Col className="gutter-row" span={8}>
           </Col>
         </Row>
-
-        <Button id="hand" onClick={this.handleSubmit}>Give me a hand 👋</Button>
+        <Upload {...props}>
+          <Button>
+            <Button id="hand" onClick={this.handleSubmit}>Give me a hand 👋</Button>
+          </Button>
+        </Upload>
       </div>
     );
   }
 }
+
+const props = {
+  name: 'file',
+  action: '',
+  headers: {
+    authorization: 'authorization-text',
+  },
+  onChange(info) {
+    if (info.file.status !== 'uploading') {
+      console.log(info.file, info.fileList);
+    }
+    if (info.file.status === 'done') {
+      message.success(`${info.file.name} file uploaded successfully`);
+    } else if (info.file.status === 'error') {
+      message.error(`${info.file.name} file upload failed.`);
+    }
+  },
+};
+
 ReactDOM.render(<Process />, document.getElementById("root"));
 export default Process;
 
