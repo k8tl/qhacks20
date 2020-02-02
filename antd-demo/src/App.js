@@ -59,7 +59,7 @@ class Process extends React.Component {
     e.preventDefault();
     const itemsRef = firebase.database().ref('en');
     const item = {
-      Cupful: "pf"
+      Pepper: "pf"
     }
     itemsRef.push(item);
     this.setState({
@@ -143,7 +143,7 @@ class Process extends React.Component {
     var temp_en = localStorage.getItem("temp_en");
     const temp = temp_en
     this.setState({
-      en: 'Cupful'
+      en: 'Pepper'
     });
   }
 
