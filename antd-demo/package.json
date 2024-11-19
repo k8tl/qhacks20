@@ -35,6 +35,6 @@
     ]
   },
   "devDependencies": {
-    "firebase": "^7.8.0"
+    "firebase": "^10.9.0"
   }
 }
